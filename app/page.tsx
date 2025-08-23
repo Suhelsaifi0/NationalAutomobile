@@ -1,103 +1,298 @@
+// app/page.tsx (Next.js 13+ with App Router)
+"use client";
+
 import Image from "next/image";
+import { FaTools, FaClock, FaUserTie, FaCogs } from "react-icons/fa";
+import Swift from "./Swift.png";
+import Brake from "./Brake.jpg";
+import Engine from "./Engine.jpg";
+import Suspension from "./Supsension.jpg"; // check spelling: should be Suspension.jpg
+import Clutch from "./Clutch.jpg";
+import Repair from "./Repair.jpg";
+import FAQ from "./components/FAQ";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
+    <main className="bg-black text-white min-h-screen">
+      {/* Navbar */}
+      <nav className="flex justify-between items-center px-8 py-4 border-b border-gray-800">
+        <h1 className="text-2xl font-bold text-red-500">National Automobile</h1>
+        <ul className="flex space-x-6 text-gray-300">
+          <li>
+            <a href="#">About</a>
           </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
+          <li>
+            <a href="#">Gallery</a>
           </li>
-        </ol>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+      </nav>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <section className="relative flex items-center justify-between px-8 py-20 bg-gradient-to-r from-black via-gray-900 to-black">
+        <div className="max-w-xl">
+          <span className="bg-red-600 px-4 py-1 text-xs uppercase tracking-wide font-bold">
+            Welcome to National Automobile
+          </span>
+          <h2 className="text-5xl font-bold mt-4">
+            Your <span className="text-red-500">Trusted</span> Auto Repair
+            Service Provider
+          </h2>
+          <p className="text-gray-400 mt-6">
+            We offer reliable and efficient services to ensure your vehicle is
+            always in top condition. Let us take care of your car, so you can
+            focus on what matters most.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className="hidden md:block">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src={Swift}
+            alt="Car"
+            width={700}
+            height={400}
+            className="rounded-lg"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="px-8 py-16 text-center">
+        <h3 className="text-red-500 uppercase text-sm tracking-wider">
+          What We Offer
+        </h3>
+        <h2 className="text-3xl font-bold mt-2">Our Services</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10">
+          {[
+            { title: "Engine Repair", img: Engine },
+            { title: "Brake Repair", img: Brake },
+            { title: "Clutch Repair", img: Clutch },
+            { title: "Suspension Repair", img: Suspension },
+          ].map((service, idx) => (
+            <div
+              key={idx}
+              className="bg-gray-900 rounded-xl overflow-hidden shadow-lg"
+            >
+              <Image
+                src={service.img}
+                alt={service.title}
+                width={300}
+                height={200}
+                className="w-full h-40 object-cover"
+              />
+              <div className="p-4">
+                <h4 className="text-lg font-semibold">{service.title}</h4>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="px-8 py-16 bg-gray-900">
+        <h3 className="text-center text-red-500 uppercase text-sm tracking-wider">
+          Why Choose Us?
+        </h3>
+        <p className="text-center text-gray-400 mb-12">
+          We’re here for whatever you need
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <FaTools className="text-red-500 text-3xl mx-auto mb-4" />
+            <h4 className="font-bold text-lg">Competitive Pricing</h4>
+            <p className="text-gray-400 mt-2">
+              Affordable services without sacrificing quality.
+            </p>
+          </div>
+          <div>
+            <FaClock className="text-red-500 text-3xl mx-auto mb-4" />
+            <h4 className="font-bold text-lg">Fast & Efficient</h4>
+            <p className="text-gray-400 mt-2">
+              Quick turnaround so you’re back on the road fast.
+            </p>
+          </div>
+          <div>
+            <FaUserTie className="text-red-500 text-3xl mx-auto mb-4" />
+            <h4 className="font-bold text-lg">Certified Technicians</h4>
+            <p className="text-gray-400 mt-2">
+              Experienced professionals handling your car.
+            </p>
+          </div>
+          <div>
+            <FaCogs className="text-red-500 text-3xl mx-auto mb-4" />
+            <h4 className="font-bold text-lg">Quality Parts</h4>
+            <p className="text-gray-400 mt-2">
+              Only top-grade parts & equipment used.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="px-8 py-16 text-center">
+        <h3 className="text-red-500 uppercase text-sm tracking-wider">
+          Testimonials
+        </h3>
+        <h2 className="text-3xl font-bold mt-2">What Our Clients Say</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+          <div className="bg-gray-900 p-6 rounded-xl">
+            <p className="text-gray-300">
+              I have been taking my car to National Auto for years. Their
+              service is always reliable and the staff are super friendly.
+            </p>
+            <div className="mt-4 text-left">
+              <p className="font-bold">Rajesh Kumar</p>
+              <p className="text-red-500 text-sm">★★★★★</p>
+            </div>
+          </div>
+          <div className="bg-gray-900 p-6 rounded-xl">
+            <p className="text-gray-300">
+              Quick and expert service with affordable pricing. Highly recommend
+              them for anyone looking for trustworthy auto repair.
+            </p>
+            <div className="mt-4 text-left">
+              <p className="font-bold">Yash Pal</p>
+              <p className="text-red-500 text-sm">★★★★★</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Appointment Call-to-Action */}
+      <section className="relative flex items-center justify-center px-8 py-20 bg-gray-800 rounded-xl mx-8 my-12">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold">
+            Ready to schedule an{" "}
+            <span className="text-red-500">appointment?</span>
+          </h2>
+          <p className="text-gray-400 mt-2">
+            Contact us today to book your next service.
+          </p>
+          <p>+91 9891696828</p>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section className="px-8 py-16 flex flex-col md:flex-row items-center gap-10">
+        {/* Left Side - Content */}
+        <div className="flex-1">
+          <h3 className="text-red-500 uppercase text-sm tracking-wider">
+            About Us
+          </h3>
+          <h2 className="text-3xl font-bold mt-2">
+            Our Reputation Speaks for Itself
+          </h2>
+          <p className="text-gray-400 mt-6 max-w-2xl">
+            National Automobile is a family-owned and operated business that has
+            been serving customers for over 20 years. Our mission is to deliver
+            exceptional auto repair and maintenance services with honesty and
+            integrity.
+          </p>
+          <button className="mt-6 px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg font-semibold">
+            Learn More
+          </button>
+        </div>
+
+        {/* Right Side - Image */}
+        <div className="flex-1 flex justify-center ml-50">
           <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
+            src={Swift}
+            alt="Car Service"
+            width={590}
+            height={300}
+            className="rounded-lg object-cover"
           />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="px-8 py-20 bg-gray-900 text-white">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-stretch">
+          {/* Left Image */}
+          <div className="flex">
+            <div className="w-full h-[400px] mt-8 mr-10">
+              {" "}
+              {/* container height set */}
+              <Image
+                src={Repair}
+                alt="Car Service"
+                width={600}
+                height={400}
+                className="rounded-lg object-cover w-full h-full"
+              />
+            </div>
+          </div>
+
+          {/* Right FAQ */}
+          <FAQ />
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-black text-gray-400 px-8 py-12">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-12">
+          {/* Logo & Contact */}
+          <div>
+            <h2 className="text-2xl font-bold text-white">
+              National <span className="text-red-500">Automobile</span>
+            </h2>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>📍 SE - 387 Shastri Nagar , Near Petrol Pump , Ghaziabad</li>
+              <li>📞 +91 9891696828</li>
+              <li>✉️ hello@nationalAutomobile.com</li>
+              <li>🌐 www.nationalAutomobile.com</li>
+            </ul>
+          </div>
+
+          {/* Opening Hours */}
+          <div>
+            <h3 className="text-white font-semibold text-lg">Opening Hours</h3>
+            <p className="mt-4 text-sm">Sun – Mon : 9:00 AM – 8:00 PM</p>
+            <p className="text-sm">Tues : 9:00 AM – 4:00 PM</p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-white font-semibold text-lg">Quick Links</h3>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>About Us</li>
+              <li>Why with Us</li>
+              <li>Our Services</li>
+              <li>How it Works</li>
+              <li>Pricing Plan</li>
+              <li>Appointment</li>
+              <li>Blog</li>
+              <li>FAQ</li>
+            </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h3 className="text-white font-semibold text-lg">
+              Subscribe to Our Newsletter
+            </h3>
+            <p className="mt-4 text-sm">
+              Sign up for exclusive promotions, news, and tips.
+            </p>
+            <div className="mt-4 flex">
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="flex-1 px-3 py-2 rounded-l-lg bg-gray-800 text-sm outline-none"
+              />
+              <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-r-lg text-white text-sm font-semibold">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom line */}
+        <div className="text-center text-sm text-gray-500 mt-12">
+          Copyright © 2025 National Automobile. All rights reserved.
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }

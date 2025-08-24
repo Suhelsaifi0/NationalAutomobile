@@ -2,18 +2,47 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { FaTools, FaClock, FaUserTie, FaCogs, FaBars, FaTimes } from "react-icons/fa";
+import { useState, useRef, useEffect } from "react";
+import {
+  FaTools,
+  FaClock,
+  FaUserTie,
+  FaCogs,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
+import Typed from "typed.js"; // <-- added
 import Swift from "./Swift.png";
 import Brake from "./Brake.jpg";
 import Engine from "./Engine.jpg";
-import Suspension from "./Suspension.jpg"; 
+import Suspension from "./Suspension.jpg";
 import Clutch from "./Clutch.jpg";
 import Repair from "./Repair.jpg";
 import FAQ from "./components/FAQ";
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Ref for typed.js
+  const typedEl = useRef(null);
+
+  useEffect(() => {
+    const typed = new Typed(typedEl.current, {
+      strings: [
+        "Auto Repair Service Provider",
+        "Maintenance Experts",
+        "Expert Auto Service",
+      ],
+      typeSpeed: 100,
+      backSpeed: 80,
+      backDelay: 1000,
+      loop: true,
+    });
+
+    return () => {
+      typed.destroy();
+    };
+  }, []);
 
   return (
     <main className="bg-black text-white min-h-screen">
@@ -25,9 +54,15 @@ export default function Home() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 text-gray-300">
-          <li><a href="#">About</a></li>
-          <li><a href="#">Gallery</a></li>
-          <li><a href="#">Contact</a></li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Gallery</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
         </ul>
 
         {/* Mobile Menu Button */}
@@ -41,9 +76,15 @@ export default function Home() {
         {/* Mobile Menu Dropdown */}
         {menuOpen && (
           <ul className="absolute top-14 left-0 w-full bg-gray-900 flex flex-col items-center space-y-4 py-6 md:hidden">
-            <li><a href="#">About</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Contact</a></li>
+            <li>
+              <a href="#">About</a>
+            </li>
+            <li>
+              <a href="#">Gallery</a>
+            </li>
+            <li>
+              <a href="#">Contact</a>
+            </li>
           </ul>
         )}
       </nav>
@@ -55,8 +96,7 @@ export default function Home() {
             Welcome to National Automobile
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mt-4">
-            Your <span className="text-red-500">Trusted</span> Auto Repair
-            Service Provider
+            Your Car <span className="text-red-500" ref={typedEl}></span>
           </h2>
           <p className="text-gray-400 mt-6">
             We offer reliable and efficient services to ensure your vehicle is
@@ -70,7 +110,7 @@ export default function Home() {
             alt="Car"
             width={600}
             height={400}
-            className="rounded-lg mx-auto"
+            className="rounded-lg mx-auto select-none pointer-events-none"
           />
         </div>
       </section>
@@ -97,7 +137,7 @@ export default function Home() {
                 alt={service.title}
                 width={300}
                 height={200}
-                className="w-full h-40 object-cover"
+                className="w-full h-40 object-cover select-none pointer-events-none"
               />
               <div className="p-4">
                 <h4 className="text-lg font-semibold">{service.title}</h4>
@@ -218,7 +258,7 @@ export default function Home() {
             alt="Car Service"
             width={590}
             height={300}
-            className="rounded-lg object-cover mx-auto"
+            className="rounded-lg object-cover mx-auto select-none pointer-events-none"
           />
         </div>
       </section>
@@ -233,7 +273,7 @@ export default function Home() {
                 alt="Car Service"
                 width={600}
                 height={400}
-                className="rounded-lg object-cover w-full h-full"
+                className="rounded-lg object-cover w-full h-full select-none pointer-events-none"
               />
             </div>
           </div>
@@ -243,7 +283,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-black text-gray-400 px-6 md:px-12 py-12">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+        <div className="max-w-6xl mx-auto flex flex-wrap justify-evenly gap-12 text-center md:text-left">
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-white">
               National <span className="text-red-500">Automobile</span>
@@ -266,35 +306,14 @@ export default function Home() {
             <h3 className="text-white font-semibold text-lg">Quick Links</h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li>About Us</li>
-              <li>Why with Us</li>
+              <li>Why Choose Us</li>
               <li>Our Services</li>
-              <li>How it Works</li>
-              <li>Pricing Plan</li>
               <li>Appointment</li>
-              <li>Blog</li>
               <li>FAQ</li>
             </ul>
           </div>
-
-          <div>
-            <h3 className="text-white font-semibold text-lg">
-              Subscribe to Our Newsletter
-            </h3>
-            <p className="mt-4 text-sm">
-              Sign up for exclusive promotions, news, and tips.
-            </p>
-            <div className="mt-4 flex">
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="flex-1 px-3 py-2 rounded-l-lg bg-gray-800 text-sm outline-none"
-              />
-              <button className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-r-lg text-white text-sm font-semibold">
-                Submit
-              </button>
-            </div>
-          </div>
         </div>
+
         <div className="text-center text-sm text-gray-500 mt-12">
           Copyright © 2025 National Automobile. All rights reserved.
         </div>

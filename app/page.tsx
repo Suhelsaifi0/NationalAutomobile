@@ -1,42 +1,60 @@
-// app/page.tsx (Next.js 13+ with App Router)
+// app/page.tsx
 "use client";
 
 import Image from "next/image";
-import { FaTools, FaClock, FaUserTie, FaCogs } from "react-icons/fa";
+import { useState } from "react";
+import { FaTools, FaClock, FaUserTie, FaCogs, FaBars, FaTimes } from "react-icons/fa";
 import Swift from "./Swift.png";
 import Brake from "./Brake.jpg";
 import Engine from "./Engine.jpg";
-import Suspension from "./Supsension.jpg"; // check spelling: should be Suspension.jpg
+import Suspension from "./Suspension.jpg"; 
 import Clutch from "./Clutch.jpg";
 import Repair from "./Repair.jpg";
 import FAQ from "./components/FAQ";
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <main className="bg-black text-white min-h-screen">
       {/* Navbar */}
-      <nav className="flex justify-between items-center px-8 py-4 border-b border-gray-800">
-        <h1 className="text-2xl font-bold text-red-500">National Automobile</h1>
-        <ul className="flex space-x-6 text-gray-300">
-          <li>
-            <a href="#">About</a>
-          </li>
-          <li>
-            <a href="#">Gallery</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
+      <nav className="flex justify-between items-center px-6 py-4 border-b border-gray-800 relative">
+        <h1 className="text-xl md:text-2xl font-bold text-red-500">
+          National Automobile
+        </h1>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-6 text-gray-300">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Gallery</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-2xl text-gray-300"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        {/* Mobile Menu Dropdown */}
+        {menuOpen && (
+          <ul className="absolute top-14 left-0 w-full bg-gray-900 flex flex-col items-center space-y-4 py-6 md:hidden">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section className="relative flex items-center justify-between px-8 py-20 bg-gradient-to-r from-black via-gray-900 to-black">
-        <div className="max-w-xl">
+      <section className="flex flex-col md:flex-row items-center justify-between px-6 md:px-12 py-12 md:py-20 bg-gradient-to-r from-black via-gray-900 to-black">
+        <div className="max-w-xl text-center md:text-left">
           <span className="bg-red-600 px-4 py-1 text-xs uppercase tracking-wide font-bold">
             Welcome to National Automobile
           </span>
-          <h2 className="text-5xl font-bold mt-4">
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">
             Your <span className="text-red-500">Trusted</span> Auto Repair
             Service Provider
           </h2>
@@ -46,24 +64,24 @@ export default function Home() {
             focus on what matters most.
           </p>
         </div>
-        <div className="hidden md:block">
+        <div className="mt-8 md:mt-0">
           <Image
             src={Swift}
             alt="Car"
-            width={700}
+            width={600}
             height={400}
-            className="rounded-lg"
+            className="rounded-lg mx-auto"
           />
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="px-8 py-16 text-center">
+      <section className="px-6 md:px-12 py-12 md:py-16 text-center">
         <h3 className="text-red-500 uppercase text-sm tracking-wider">
           What We Offer
         </h3>
-        <h2 className="text-3xl font-bold mt-2">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-10">
+        <h2 className="text-2xl md:text-3xl font-bold mt-2">Our Services</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-10">
           {[
             { title: "Engine Repair", img: Engine },
             { title: "Brake Repair", img: Brake },
@@ -90,14 +108,14 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="px-8 py-16 bg-gray-900">
+      <section className="px-6 md:px-12 py-12 md:py-16 bg-gray-900">
         <h3 className="text-center text-red-500 uppercase text-sm tracking-wider">
           Why Choose Us?
         </h3>
         <p className="text-center text-gray-400 mb-12">
           We’re here for whatever you need
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <FaTools className="text-red-500 text-3xl mx-auto mb-4" />
             <h4 className="font-bold text-lg">Competitive Pricing</h4>
@@ -130,11 +148,13 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="px-8 py-16 text-center">
+      <section className="px-6 md:px-12 py-12 md:py-16 text-center">
         <h3 className="text-red-500 uppercase text-sm tracking-wider">
           Testimonials
         </h3>
-        <h2 className="text-3xl font-bold mt-2">What Our Clients Say</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mt-2">
+          What Our Clients Say
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
           <div className="bg-gray-900 p-6 rounded-xl">
             <p className="text-gray-300">
@@ -160,30 +180,29 @@ export default function Home() {
       </section>
 
       {/* Appointment Call-to-Action */}
-      <section className="relative flex items-center justify-center px-8 py-20 bg-gray-800 rounded-xl mx-8 my-12">
+      <section className="relative flex items-center justify-center px-6 md:px-12 py-12 md:py-20 bg-gray-800 rounded-xl mx-4 md:mx-8 my-8 md:my-12">
         <div className="text-center">
-          <h2 className="text-3xl font-bold">
+          <h2 className="text-2xl md:text-3xl font-bold">
             Ready to schedule an{" "}
             <span className="text-red-500">appointment?</span>
           </h2>
           <p className="text-gray-400 mt-2">
             Contact us today to book your next service.
           </p>
-          <p>+91 9891696828</p>
+          <p className="font-semibold mt-2">+91 9891696828</p>
         </div>
       </section>
 
       {/* About Us Section */}
-      <section className="px-8 py-16 flex flex-col md:flex-row items-center gap-10">
-        {/* Left Side - Content */}
-        <div className="flex-1">
+      <section className="px-6 md:px-12 py-12 md:py-16 flex flex-col md:flex-row items-center gap-10">
+        <div className="flex-1 text-center md:text-left">
           <h3 className="text-red-500 uppercase text-sm tracking-wider">
             About Us
           </h3>
-          <h2 className="text-3xl font-bold mt-2">
+          <h2 className="text-2xl md:text-3xl font-bold mt-2">
             Our Reputation Speaks for Itself
           </h2>
-          <p className="text-gray-400 mt-6 max-w-2xl">
+          <p className="text-gray-400 mt-6 max-w-2xl mx-auto md:mx-0">
             National Automobile is a family-owned and operated business that has
             been serving customers for over 20 years. Our mission is to deliver
             exceptional auto repair and maintenance services with honesty and
@@ -193,27 +212,22 @@ export default function Home() {
             Learn More
           </button>
         </div>
-
-        {/* Right Side - Image */}
-        <div className="flex-1 flex justify-center ml-50">
+        <div className="flex-1">
           <Image
             src={Swift}
             alt="Car Service"
             width={590}
             height={300}
-            className="rounded-lg object-cover"
+            className="rounded-lg object-cover mx-auto"
           />
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="px-8 py-20 bg-gray-900 text-white">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-stretch">
-          {/* Left Image */}
+      <section className="px-6 md:px-12 py-12 md:py-20 bg-gray-900 text-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
           <div className="flex">
-            <div className="w-full h-[400px] mt-8 mr-10">
-              {" "}
-              {/* container height set */}
+            <div className="w-full h-[250px] sm:h-[350px] md:h-[400px]">
               <Image
                 src={Repair}
                 alt="Car Service"
@@ -223,18 +237,15 @@ export default function Home() {
               />
             </div>
           </div>
-
-          {/* Right FAQ */}
           <FAQ />
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-gray-400 px-8 py-12">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-12">
-          {/* Logo & Contact */}
+      <footer className="bg-black text-gray-400 px-6 md:px-12 py-12">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
           <div>
-            <h2 className="text-2xl font-bold text-white">
+            <h2 className="text-xl md:text-2xl font-bold text-white">
               National <span className="text-red-500">Automobile</span>
             </h2>
             <ul className="mt-4 space-y-2 text-sm">
@@ -245,14 +256,12 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Opening Hours */}
           <div>
             <h3 className="text-white font-semibold text-lg">Opening Hours</h3>
             <p className="mt-4 text-sm">Sun – Mon : 9:00 AM – 8:00 PM</p>
             <p className="text-sm">Tues : 9:00 AM – 4:00 PM</p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h3 className="text-white font-semibold text-lg">Quick Links</h3>
             <ul className="mt-4 space-y-2 text-sm">
@@ -267,7 +276,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
             <h3 className="text-white font-semibold text-lg">
               Subscribe to Our Newsletter
@@ -287,8 +295,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Bottom line */}
         <div className="text-center text-sm text-gray-500 mt-12">
           Copyright © 2025 National Automobile. All rights reserved.
         </div>

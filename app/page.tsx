@@ -48,8 +48,9 @@ export default function Home() {
     <main className="bg-black text-white min-h-screen">
       {/* Navbar */}
       <nav className="flex justify-between items-center px-6 py-4 border-b border-gray-800 relative">
-        <h1 className="text-xl md:text-2xl font-bold text-red-500">
-          National Automobile
+        <h1 className="text-xl md:text-2xl font-bold">
+          <span className="text-white">National</span>{" "}
+          <span className="text-red-500">Automobile</span>
         </h1>
 
         {/* Desktop Menu */}
@@ -62,6 +63,17 @@ export default function Home() {
           </li>
           <li>
             <a href="#">Contact</a>
+          </li>
+          <li>
+            {/* Google Map link */}
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=28.6760572,77.4701866"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold"
+            >
+              📍 Location
+            </a>
           </li>
         </ul>
 
@@ -85,6 +97,17 @@ export default function Home() {
             <li>
               <a href="#">Contact</a>
             </li>
+            <li>
+              {/* Google Map link */}
+              <a
+                href="https://www.google.com/maps/dir/?api=1&destination=28.6760572,77.4701866"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold"
+              >
+                📍 Location
+              </a>
+            </li>
           </ul>
         )}
       </nav>
@@ -99,9 +122,9 @@ export default function Home() {
             Your Car <span className="text-red-500" ref={typedEl}></span>
           </h2>
           <p className="text-gray-400 mt-6">
-            We offer reliable and efficient services to ensure your vehicle is
-            always in top condition. Let us take care of your car, so you can
-            focus on what matters most.
+            Experience trusted and efficient Car care in Shastri Nagar,
+            Ghaziabad. We keep your vehicle running at its best, so you can
+            drive worry-free and focus on what truly matters.
           </p>
         </div>
         <div className="mt-8 md:mt-0">
@@ -229,7 +252,24 @@ export default function Home() {
           <p className="text-gray-400 mt-2">
             Contact us today to book your next service.
           </p>
-          <p className="font-semibold mt-2">+91 9891696828</p>
+          <p>Click Here</p>
+
+          {/* Call Number */}
+          <a href="tel:+919891696828" className="text-red-500 font-bold block">
+            +91 9891696828
+          </a>
+
+          {/* WhatsApp Button (niche shift kar diya) */}
+          <a
+            href="https://wa.me/919891696828"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-4"
+          >
+            <button className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 cursor-pointer">
+              💬 WhatsApp Chat
+            </button>
+          </a>
         </div>
       </section>
 
@@ -243,10 +283,12 @@ export default function Home() {
             Our Reputation Speaks for Itself
           </h2>
           <p className="text-gray-400 mt-6 max-w-2xl mx-auto md:mx-0">
-            National Automobile is a family-owned and operated business that has
-            been serving customers for over 20 years. Our mission is to deliver
-            exceptional auto repair and maintenance services with honesty and
-            integrity.
+            Best shop for car mechanic Work in shastri nagar ghaziabad
+            specialist in maruti suzuki, hyundai and honda car work are happen
+            in both petrol and diesel Also Car CNG Fitting we provide our
+            customer valuable Service with fully satisfaction and we provide car
+            service and Car maintenance in this shop owner has 20+ year of
+            Experience with his work and great knowledge about car maintenance.
           </p>
           <button className="mt-6 px-6 py-2 bg-red-600 hover:bg-red-700 rounded-lg font-semibold">
             Learn More
@@ -291,8 +333,8 @@ export default function Home() {
             <ul className="mt-4 space-y-2 text-sm">
               <li>📍 SE - 387 Shastri Nagar , Near Petrol Pump , Ghaziabad</li>
               <li>📞 +91 9891696828</li>
-              <li>✉️ hello@nationalAutomobile.com</li>
-              <li>🌐 www.nationalAutomobile.com</li>
+              <li>✉️ officialnationalautomobile@gmail.com</li>
+              {/* <li>🌐 www.nationalAutomobile.com</li> */}
             </ul>
           </div>
 
